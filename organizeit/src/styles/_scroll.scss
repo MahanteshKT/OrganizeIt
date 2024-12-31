@@ -1,0 +1,37 @@
+.custom-scroll {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* width */
+.custom-scroll {
+    &::-webkit-scrollbar {
+        width: rem(2);
+        background-color: rgb(159, 159, 159,0.6);
+    }
+}
+
+/* Track */
+.custom-scroll {
+    &::-webkit-scrollbar-track {
+        background-color: rgb(0, 0, 0, 0.4);
+        border-radius: rem(10);
+        backdrop-filter: blur(18);
+    }
+}
+
+/* Handle */
+.custom-scroll {
+    &::-webkit-scrollbar-thumb {
+        background-color: rgba(255, 255, 255,0.6);
+        border-radius: rem(10);
+        backdrop-filter: blur(15);
+    }
+}
+
+@supports (-moz-appearance:none) {
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: rgb(131, 131, 131) transparent;
+    }
+}

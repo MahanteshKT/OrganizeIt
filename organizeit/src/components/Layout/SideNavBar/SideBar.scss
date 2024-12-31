@@ -1,0 +1,31 @@
+@import "../../../styles/variables";
+@import '../../../styles/function';
+
+.sidebar {
+    .sidebar-nav-tool {
+        position: absolute;
+        top: rem(20);
+        right: rem(-14);
+        display: flex;
+        z-index: 51;
+        background-color: rgba($white-2, 0.6);
+        width: rem(14);
+        height: rem(28);
+        border-start-end-radius: rem(4);
+        border-end-end-radius: rem(4);
+        backdrop-filter: blur(20px);
+        box-shadow: transparent, transparent, 0px 0px 10px rgba($black, 0.6), transparent;
+
+        img {
+            // transform: rotate(270deg);
+            transition: 0.5s ease-in-out;
+            cursor: pointer;
+
+            &.slide {
+                transform: rotate(180deg);
+                transition: 0.5s ease-in-out;
+            }
+        }
+        
+    }
+}

@@ -1,0 +1,12 @@
+@import './../../../styles/function';
+@import './../../../styles/variables';
+
+.toolbar {
+    &::after {
+        content: '';
+        position: absolute;
+        left: rem(-15);
+        border: rem(9) solid;
+        border-color: transparent rgb(2, 6, 23) transparent transparent;
+    }
+}

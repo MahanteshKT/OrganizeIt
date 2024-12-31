@@ -1,0 +1,13 @@
+@import './../../../styles/function';
+@import './../../../styles/variables';
+
+.menuCard {
+    &::after {
+        content: '';
+        position: absolute;
+        top: rem(6);
+        left: rem(-15);
+        border: rem(9) solid;
+        border-color: transparent rgb(248, 250, 252) transparent transparent;
+    }
+}
