@@ -25,7 +25,7 @@ const useDrag = (initialPosition = { x: window.innerWidth / 2, y: window.innerHe
 
     const stopDragging = () => setIsDragging(false);
 
-    // Add event listeners using jQuery
+    // Add event listeners
     $(window).on('mousemove', handleMouseMove);
     $(window).on('mouseup', stopDragging);
     $(window).on('touchmove', handleTouchMove);
