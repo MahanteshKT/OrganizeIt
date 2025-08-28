@@ -3,7 +3,7 @@ import React from "react";
 function Input(props) {
   return (
     <div
-      className={`form-group flex flex-col gap-2 w-full  ${
+      className={`note-card-form-group form-group flex flex-col gap-2 w-full  ${
         props.className ? props.className : ""
       } w-1/2`}
     >
