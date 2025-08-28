@@ -1,6 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
+import $ from 'jquery';
 
-const useResizable = (initialWidth = 300, initialHeight = 200, minWidth = 200, minHeight = 150, maxWidth = 600, maxHeight = 400) => {
+const useResizable = (
+  initialWidth = 300,
+  initialHeight = 200,
+  minWidth = 200,
+  minHeight = 150,
+  maxWidth = 600,
+  maxHeight = 400
+) => {
   const [dimensions, setDimensions] = useState({
     width: initialWidth,
     height: initialHeight,

@@ -1,19 +1,43 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Input from '../Input/Input';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGripHorizontal, faMinimize, faMinus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import useDrag from '../../useDrag';
 import useResizable from '../../useResizable';  // Import the custom resizable hook
+import $ from 'jquery';
+import './NoteCard.scss';
 
 function NoteCard(props) {
   const { position, handleMouseDown, handleTouchStart } = useDrag();
   
   // Use the custom hook for resizable functionality
-  const { dimensions, handleMouseDown: handleResizeMouseDown } = useResizable(300, 200, 150, 150, 600, 400);
+  const { dimensions, handleMouseDown: handleResizeMouseDown } = useResizable(300, 200, 250, 150, 800, 600);
 
   const handleCurrentCard = (id) => {
     props.setNoteId(id);
-  };
+    };
+
+    useEffect(() => {
+        const handleResizeTextArea = () => {
+            if (props.noteId) {
+                const $card = $(`.note-card-${props.noteId}`);
+                const $textarea = $card.find(`.textarea-${props.noteId}`);
+
+                if ($card.length && $textarea.length) {
+                    const cardHeight = $card.height();                   // card total height
+                    const textAreaTop = $textarea.position().top;        // top position relative to card
+                    const availableHeight = cardHeight - textAreaTop;    // remaining height
+
+                    $textarea.css({
+                        height: `${availableHeight}px`,
+                        width: `${$card.width()}px`
+                    });
+                }
+            }
+        };
+
+        handleResizeTextArea();
+    }, [dimensions, props.noteId]);
 
   return (
     <div 
@@ -26,9 +50,9 @@ function NoteCard(props) {
       onClick={() => {
         handleCurrentCard(props.noteId);
       }}
-      className={`${props.noteId === props.currentSelectCard ? 'z-10' : ''} overflow-hidden fixed bg-opacity-70 backdrop-blur-lg rounded-md shadow-lg ${props.bgColor ? props.bgColor : 'bg-slate-100'}`}
+      className={`${props.noteId === props.currentSelectCard ? 'z-10' : ''} note-card-${props.noteId} overflow-hidden fixed bg-opacity-70 backdrop-blur-lg rounded-md shadow-lg ${props.bgColor ? props.bgColor : 'bg-slate-100'}`}
     >
-      <div className='flex flex-row'>
+      <div className='note-head-tools-container flex flex-row'>
         <div className='min-w-[70%] flex-1 h-[10px] p-[10px] text-[12px] flex justify-center items-center text-slate-500 hover:text-slate-700 hover:bg-slate-00 cursor-grab active:cursor-grabbing'
           onMouseDown={handleMouseDown}
           onTouchStart={handleTouchStart}
@@ -66,28 +90,36 @@ function NoteCard(props) {
             placeholder: "Title",
           }}
         />
-        <div>
-          <textarea
+        <div className="note-input-container ">
+          <textarea contenteditable="true"
             name=""
             id=""
-            className="font-markdown custom-scroll prose bg-transparent my-[10px] note-text-area outline-none border-none w-[100%] focus:shadow-none focus:outline-none focus:ring-0 resize-none overflow-y-auto scrollbar-thin scrollbar-thumb-slate-400 scrollbar-track-slate-200"
+            wrap="off"
+            style={{
+                width: `${dimensions.width}px`,  // Set width from resizable hook
+            }}
+            className={`${props.noteId ? `textarea-${props.noteId}` : ''} max-w-none note-input font-markdown custom-scroll prose bg-transparent py-[10px] note-text-area outline-none border-none w-[100%] focus:shadow-none focus:outline-none focus:ring-0 resize-none overflow-y-auto scrollbar-thin scrollbar-thumb-slate-400 scrollbar-track-slate-200`}
           />
         </div>
       </div>
 
       {/* Resize handle at the bottom right */}
-      <div
-        onMouseDown={handleResizeMouseDown}  // Handle the mouse down event to trigger resizing
-        onTouchStart={handleTouchStart}
-        style={{
-          position: 'absolute',
-          bottom: '5px',
-          right: '5px',
-          width: '20px',
-          height: '20px',
-          backgroundColor: '#007bff',
-          cursor: 'se-resize',  // Cursor style to indicate resize
-        }}
+      <div className='resize-handle-container'
+              onMouseDown={(e) => {
+                handleResizeMouseDown(e);
+        }}  // Handle the mouse down event to trigger resizing
+              onTouchStart={(e) => {
+                  handleTouchStart(e);
+              }}
+          ></div>
+           {/* Resize handle at the bottom right */}
+      <div className='resize-handle-container resize-handle-container-2'
+              onMouseDown={(e) => {
+                handleResizeMouseDown(e);
+        }}  // Handle the mouse down event to trigger resizing
+              onTouchStart={(e) => {
+                  handleTouchStart(e);
+              }}
       ></div>
     </div>
   );
