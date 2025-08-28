@@ -37,8 +37,8 @@ function NavLink(props) {
                         <FontAwesomeIcon icon={navLinkObj.fontIcon} className='text-[18px]' />
                     </span>
 
-                    {navLinkObj.isSideActive && (
-                        <span className='pl-[10px] font-semibold duration-600 animate-slideInRightMd'>
+                    {(
+                        <span className={`${navLinkObj.isSideActive ? '' : 'hidden'} pl-[10px] font-semibold animate-slideInRightMd`}>
                             {navLinkObj.navText}
                         </span>
                     )}

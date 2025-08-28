@@ -11,7 +11,7 @@ function SideNavBar() {
         
     }, []);
   return (
-      <div className={` ${isSideActive ? 'min-w-[200px] ' : 'min-w-[70px]'} + ${'sidebar fixed duration-500 z-50 h-[100vh] p-[12px] bg-slate-100 top-0 left-0 bg-opacity-60 rounded-e-md backdrop-blur-md shadow-2xl boxShadow-3xl mb-[12px] flex flex-col justify-between'}`}>
+      <div className={` ${isSideActive ? 'w-[200px] ' : 'w-[70px]'} + sidebar fixed duration-500 z-50 h-[100vh] p-[12px] bg-slate-100 top-0 left-0 bg-opacity-60 rounded-e-md backdrop-blur-md shadow-2xl boxShadow-3xl mb-[12px] flex flex-col justify-between`}>
           <div className='sidebar-container w-[100%]'>
               <div className='w-[44px] h-[44px] rounded-[50%] bg-black m-auto cursor-pointer'>
                 <img src={logo} alt="OrganizeIt"/>

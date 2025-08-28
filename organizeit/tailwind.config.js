@@ -16,7 +16,8 @@ module.exports = {
               '100%': { transform: 'translateX(0%)', opacity: '1' },
             },
            'slideInRight-md': {
-                '0%': { transform: 'translateX(70%)', opacity: '0' , width: '0px' },
+               '0%': { transform: 'translateX(70%)', opacity: '0', width: '0px' },
+               '50%': { opacity: '0.5', width: '50%' },
                 '100%': { transform: 'translateX(0%)', opacity: '1', width: '100%' },
             }
           },
